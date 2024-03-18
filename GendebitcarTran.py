@@ -1,8 +1,10 @@
 import csv
 import random
 import boto3
+import pytz
 from faker import Faker
 from datetime import datetime, timedelta
+
 
 # Function to generate mock data for a single transaction
 def generate_transaction():
@@ -32,7 +34,7 @@ def generate_daily_transactions(date, num_transactions, s3_bucket):
     s3_client.upload_file('/tmp/transactions.csv', s3_bucket, s3_key)
 
 def lambda_handler(event, context):
-    current_date = datetime.now().date()  # Get the current system date
+    current_date = datetime.now(pytz.utc).date()  # Get the current system date in UTC
     num_transactions = 100  # Modify the number of transactions as needed
     s3_bucket = "customer-debitcard-purchases"  # Specify your S3 bucket name
     generate_daily_transactions(current_date, num_transactions, s3_bucket)
