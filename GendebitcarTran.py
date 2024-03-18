@@ -12,7 +12,7 @@ def generate_transaction():
     debit_card_number = fake.credit_card_number(card_type='visa')
     debit_card_type = 'VISA'  # For simplicity, you can change this to a random card type
     bank_name = fake.random_element(elements=('Bank A', 'Bank B', 'Bank C'))
-    transaction_date = fake.date_time_between(start_date="-1y", end_date="now")
+    transaction_date = fake.date_time_between(start_date="-1y", end_date="now").strftime('%Y-%m-%d %H:%M:%S')
     amount_spend = round(random.uniform(1, 1000), 2)  # Random amount between 1 and 1000
     return [customer_id, name, debit_card_number, debit_card_type, bank_name, transaction_date, amount_spend]
 
