@@ -32,7 +32,8 @@ def generate_daily_transactions(date, num_transactions, s3_bucket):
     s3_client.upload_file('/tmp/transactions.csv', s3_bucket, s3_key)
 
 def lambda_handler(event, context):
-    date = datetime(2024, 3, 18)  # Modify the date as needed
+    current_date = datetime.now().date()  # Get the current system date
     num_transactions = 100  # Modify the number of transactions as needed
     s3_bucket = "customer-debitcard-purchases"  # Specify your S3 bucket name
-    generate_daily_transactions(date, num_transactions, s3_bucket)
+    generate_daily_transactions(current_date, num_transactions, s3_bucket)
+
